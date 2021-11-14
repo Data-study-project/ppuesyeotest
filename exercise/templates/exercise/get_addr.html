@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="{% static 'js/get_addr.js' %} "></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/addr_style.css' %}">
+
+    <title>뿌셔 테스트</title>
+</head>
+<body>
+    <section id="main_contents">
+      <div class="wrapper container">
+        <h1>주소를 입력하세요</h1>
+
+        <form action="{% url 'exercise:get_locations' %}" method="POST" name="addr_form">
+            {% csrf_token %}
+            <div class="container sub-container">
+                <input type="text" id="address_kakao" name="address" placeholder="Click Me!">
+                <input type="text" id="data1" name="data1" class="my-data">
+                <input type="text" id="data2" name="data2" class="my-data">
+                <div class="btn_wrap">
+                    <a href="{% url 'main:index' %}">
+                        <button id="main_btn" type="button">Main</button>
+                    </a>
+                    <button id="go_btn" class="next_btn_input" onclick="check_input()">Next</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </section>
+</body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+    document.getElementById("address_kakao").addEventListener("click", function(){ 
+        
+        new daum.Postcode({
+            oncomplete: function(data) { 
+                document.getElementById("address_kakao").value = data.address; 
+                document.getElementById("data1").value = data.sigungu; 
+                document.getElementById("data2").value = data.bname; 
+                console.log(data)
+            }
+        }).open();
+    });
+}
+</script>
+</html>

@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>뿌셔 테스트</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script type="text/javascript" src="{% static 'js/main.js' %} "></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+</head>
+<body>
+    <section id="main_contents">
+    <div class="wrapper">
+      <div class="title">
+        <h3 class="main_title">나의 건강 유형은</h3>
+        <h3 class="sub_title">어떤걸까?</h3>
+      </div>
+      <div class="intro">
+        <div class="type">
+          <ul class="type_list">
+            <li>나무늘보</li>
+            <li>도마뱀</li>
+            <li>코끼리</li>
+            <li>펭귄</li>
+            <li>민달팽이</li>
+          </ul>
+        </div>
+      </div>
+      <div class="button">
+        <a href="{% url 'survey:question' %}">
+          <button class="start" type="button">start</button>
+        </a>
+        <a href="{% url 'exercise:get_addr' %}">
+          <button class="start" type="button">체육 시설 알아보기</button>
+        </a>
+      </div>
+      <div class="share">
+        <div class="content">
+          <a href="javascript:copyUrl()" title="linkcopy"> 
+            <img src="{% static 'image/link_icon.png' %}" width=50 alt="linkcopy">
+          </a>
+          <a href="javascript:sharefacebook()" title="facebookshare">
+            <img src="{% static 'image/facebook_icon.png' %}" width=50 alt="Facebook">
+          </a>
+          <a href="javascript:sendLink()" title="kakaohare">
+            <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
+          </a>
+        </div>
+      </div>
+
+      <div class="result_data">
+        <div class="data_wrap">
+          <h3>참여한 사람</h3>
+          <ul>
+
+            <li class="cnt_style">{{ survey_cnt }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="project_pyh">
+        <a href="https://github.com/Data-study-project">
+          <img src="{% static 'image/data_logo.png' %} " alt="logo">
+        </a>
+      </div>
+    </div>
+  </section>
+</body>
+
+<script>kakao.init('{{apiKey}}');</script>
+<script>
+function sendLink() {
+  let result_url = window.location.href;
+  Kakao.Link.sendDefault({
+    objectType: 'feed',
+    content: {
+      title: '나의 건강 상태는?',
+      description: '나의 현재 건강 상태는 어떨까?',
+      imageUrl:
+        '',
+      link: {
+        mobileWebUrl: '',
+        webUrl: '',
+      },
+    },
+    social: {
+      likeCount: 100,
+      commentCount: 10,
+      sharedCount: 100,
+    },
+    buttons: [
+      {
+        title: '결과 확인하기',
+        link: {
+          webUrl: result_url,
+          mobileWebUrl: result_url,
+        },
+      },
+      {
+        title: '테스트 해보기',
+        link: {
+          webUrl: '',
+          mobileWebUrl: '',
+        },
+      },
+    ]
+  });
+
+};
+</script>
+</html>

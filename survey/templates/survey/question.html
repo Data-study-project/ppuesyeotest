@@ -1,0 +1,225 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <title>뿌셔 테스트</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script type="text/javascript" src="{% static 'js/form.js' %} "></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+</head>
+<body>
+
+
+  <section id="survey">
+    <div class="wrapper">
+      <form action="{% url 'survey:question' %}" method="POST" id="form">
+        {% csrf_token %}
+          <div class="test">
+            <div class="question_container">
+              <h3 class="number">1/8</h3>
+              <h3 class="question">나이대를 골라주세요</h3>
+            </div>
+            <div class="answer">
+              <div>
+                <input id="one_one" type="radio" name="age" value="1">
+                  <label for="one_one">10대</label>
+                </input>
+              </div>
+              <div>
+                <input id="one_two" type="radio" name="age" value="2">
+                  <label for="one_two">20대</label>
+                </input>
+              </div>
+              <div>
+                <input id="one_thr" type="radio" name="age" value="3">
+                  <label for="one_thr">30대</label>
+                </input>
+              </div>
+              <div>
+                <input id="one_four" type="radio" name="age" value="4">
+                  <label for="one_four">40대</label>
+                </input>
+              </div>
+              <div>
+                <input id="one_five" type="radio" name="age" value="5">
+                  <label for="one_five">50대</label>
+                </input>
+              </div>
+              <div>
+                <input id="one_six" type="radio" name="age" value="6">
+                  <label for="one_six">60대</label>
+                </input>
+              </div>
+              <div>
+                <input id="one_sev" type="radio" name="age" value="7">
+                  <label for="one_sev">70대</label>
+                </input>
+              </div>
+              <div>
+                <input id="one_eit" type="radio" name="age" value="8">
+                  <label for="one_eit">80대 이상</label>
+                </input>
+              </div>
+            </div>
+            <div class="btn_wrap">
+              <button class="next_btn">Next</button>
+            </div>
+          </div>
+          <div class="test">
+            <div class="question_container">
+              <h3 class="number">2/8</h3>
+              <h3 class="question">성별을 골라주세요</h3>
+            </div>
+            <div class="answer">
+              <div>
+                <input id="two_one" type="radio" name="sex" value="M">
+                  <label for="two_one">남자</label>
+                </input>
+              </div>
+              <div>
+                <input id="two_two" type="radio" name="sex" value="F">
+                  <label for="two_two">여자</label>
+                </input>
+              </div>
+            </div>
+            <div class="btn_wrap btn_sort">
+              <button class="prev_btn">Back</button>
+              <button class="next_btn">Next</button>
+            </div>
+          </div>
+        <div class="test">
+          <div class="question_container">
+            <h3 class="number">3/8</h3>
+            <h3 class="question">키를 알려주세요</h3>
+          </div>
+          <div class="answer">
+            <div>
+              <input id="thr_one" type="number" name="height" class="chk">
+                <label for="thr_one">cm (키를 입력해주세요)</label>
+              </input>
+            </div>
+            
+          </div>
+          <div class="btn_wrap btn_sort">
+            <button class="prev_btn">Back</button>
+            <button class="next_btn_input">Next</button>
+          </div>
+        </div>
+        <div class="test">
+          <div class="question_container">
+            <h3 class="number">4/8</h3>
+            <h3 class="question">몸무게를 알려주세요</h3>
+          </div>
+          <div class="answer">
+            <div>
+              <input id="fou_one" type="number" name="weight" class="chk">
+                <label for="fou_one">kg (몸무게를 입력해주세요)</label>
+              </input>
+            </div>
+          </div>
+          <div class="btn_wrap btn_sort">
+            <button class="prev_btn">Back</button>
+            <button class="next_btn_input">Next</button>
+          </div>
+        </div>
+      
+        <div class="test">
+          <div class="question_container">
+            <h3 class="number">5/8</h3>
+            <h3 class="question">오늘 하루의 걸음수를 알려주세요</h3>
+          </div>
+          <div class="answer">
+            <div>
+              <input id="fiv_one" type="number" name="walk_cnt" class="chk">
+                <label for="fiv_one">걸음수를 입력해주세요</label>
+              </input>
+            </div>
+          </div>
+          <div class="btn_wrap btn_sort">
+            <button class="prev_btn">Back</button>
+            <button class="next_btn_input">Next</button>
+          </div>
+        </div>
+        <div class="test">
+          <div class="question_container">
+            <h3 class="number">6/8</h3>
+            <h3 class="question">자연바람? 에어컨바람? 어떤게 좋으세요?</h3>
+          </div>
+          <div class="answer">
+            <div>
+              <input id="six_one" type="radio" name="indoor" value="1">
+                <label for="six_one">뭐니뭐니해도 에어컨 바람이 짱이지~</label>
+              </input>
+            </div>
+            <div>
+              <input id="six_two" type="radio" name="indoor" value="0">
+                <label for="six_two">선선한 자연 공기를 느끼고 싶어</label>
+              </input>
+            </div>
+          </div>
+          <div class="btn_wrap btn_sort">
+            <button class="prev_btn">Back</button>
+            <button class="next_btn">Next</button>
+          </div>
+        </div>
+        <div class="test">
+          <div class="question_container">
+            <h3 class="number">7/8</h3>
+            <h3 class="question">운동을 하게 된다면 혼자? 같이? 어떤게 좋으세요?</h3>
+          </div>
+          <div class="answer">
+            <div>
+              <input id="sev_one" type="radio" name="alone" value="1">
+                <label for="sev_one">혼자서 운동하는 게 제일 편해!</label>
+              </input>
+            </div>
+            <div>
+              <input id="sev_two" type="radio" name="alone" value="0">
+                <label for="sev_two">여러명이서 다 같이 운동해야 재밌어</label>
+              </input>
+            </div>
+          </div>
+          <div class="btn_wrap btn_sort">
+            <button class="prev_btn">Back</button>
+            <button class="next_btn">Next</button>
+          </div>
+        </div>
+        <div class="test">
+          <div class="question_container">
+            <h3 class="number">8/8</h3>
+            <h3 class="question">운동을 하게 된다면 가볍게? 제대로? 어떤게 좋으세요?</h3>
+          </div>
+          <div class="answer">
+            <div>
+              <input id="eit_one" type="radio" name="light" value="1">
+                <label for="eit_one">일단 가볍게 시작해보자</label>
+              </input>
+            </div>
+            <div>
+              <input id="eit_two" type="radio" name="light" value="0">
+                <label for="eit_two">이왕할 거 제대로 시작해볼래!</label>
+              </input>
+            </div>
+          </div>
+          <div class="btn_wrap btn_sort">
+            <button class="prev_btn">Back</button>
+            <input type="submit" value="End" class="submit_btn">
+          </div>
+        </div>
+
+      </form>
+
+        
+    </div>
+  </section>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/locations_style.css' %}">
+
+  <title>뿌셔 테스트</title>
+</head>
+<body>
+  <section id="main_contents">
+    <div class="wrapper">
+      <div class="btn_wrap">
+        <a href="{% url 'exercise:get_addr' %}">
+          <button type="button">Back</button>
+        </a>
+      </div>
+      <div class="title">
+        <h1 class="main_title">운동 시설 목록</h1>
+        <p class="sub_title">운동시설 개수 : {{ exercises.count }}</p>
+      </div>
+      <div class="intro">
+        {% for exercise in exercises %}
+          <p>{{ exercise.sports }}</p>
+          <p>{{ exercise.addr }}</p>
+          <p>{{ exercise.name }} </p>
+          <div class="modal modal-{{ exercise.pk }}">
+            <div class="modal_body modal-body-{{ exercise.pk }}">
+              <div id="map-{{ exercise.pk }}" style="width:100%;height:350px;"></div>
+              <button class="close-btn-{{ exercise.pk }}">닫기</button>
+            </div>
+          </div>
+          <form class="modal-open-form" data-pk="{{ exercise.pk }}" data-y="{{ exercise.y_coord }}" data-x="{{ exercise.x_coord }}" data-name="{{ exercise.name }}">
+            <button class="btn-open-popup-{{ exercise.pk }}">지도보기</button>
+          </form>
+          <hr>
+        {% endfor %}
+      </div>
+    </div>
+  
+  </section>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{apiKey}}"></script>
+  <script>
+    const forms = document.querySelectorAll('.modal-open-form')
+    forms.forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault()
+
+        const pk = form.dataset.pk
+        const y_idx = form.dataset.y
+        const x_idx = form.dataset.x
+        const name = form.dataset.name
+
+        const modal = document.querySelector(`.modal-${pk}`)
+        modal.classList.toggle('show');
+
+        const cls_btn = document.querySelector(`.close-btn-${pk}`)
+        cls_btn.addEventListener('click', () => {
+          modal.classList.remove('show')
+        })
+
+        modal.addEventListener('click', (event) => {
+          if (event.target === modal) {
+            modal.classList.toggle('show');
+          }
+        })
+
+        var mapContainer = document.getElementById(`map-${pk}`),
+        mapOption = { 
+            center: new kakao.maps.LatLng(y_idx, x_idx),
+            level: 3
+        };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        var markerPosition  = new kakao.maps.LatLng(y_idx, x_idx);
+
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+
+        marker.setMap(map);
+        var iwContent = `<div style="padding:5px;">
+            <div>${name}</div>
+            <a href="https://map.kakao.com/link/map/${name},${y_idx},${x_idx}"
+            style="color:blue" target="_blank">큰지도보기</a>
+            <a href="https://map.kakao.com/link/to/${name},${y_idx},${x_idx}" style="color:blue" target="_blank">길찾기</a></div>`
+            iwPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+
+        var infowindow = new kakao.maps.InfoWindow({
+          position : iwPosition, 
+          content : iwContent 
+        });
+        infowindow.open(map, marker); 
+      })
+    })
+
+  </script>
+</body>
+</html>

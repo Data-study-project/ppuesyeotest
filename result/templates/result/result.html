@@ -1,0 +1,230 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta property="og:title" content="나의 건강 상태는?" />
+  <meta property="og:image" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:description" content="나의 건강 상태는 현재 어떨까?" />
+
+  <script type="text/javascript" src="{% static 'js/result.js' %} "></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/result.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+  <title>뿌셔 테스트</title>
+</head>
+<body>
+  <section id="main_contents">
+    <div class="wrapper">
+      <div class="result">
+        <div class="titles">
+          <h3>당신의 하루 이동량과 닮은 동물은?</h3>
+          <h1>{{ animal.name }}</h1>
+        </div>
+        <div class="result_img">
+          <img src="{% get_static_prefix  %}image_animals/{{animal_id}}.png" alt="animal img">
+        </div>
+      </div>
+      <div class="result_explains">
+        <div class="explain">
+          <h3 class="title">{{ animal.name }}의 특징은?</h3>
+          <ul>
+            <li>{{ animal.content1 }}</li>
+            <li>{{ animal.content2 }}</li>
+          </ul>
+        </div>
+        <div class="explain">
+          <h3 class="title">나의 운동 능력은</h3>
+          <div style="width: 500px; height:300px;">
+            <canvas id="walk"></canvas>
+          </div>
+          <div style="width: 500px; height:300px;">
+            <canvas id="bmi"></canvas>
+          </div>
+          <ul>
+            <li>하루 걸음수는 {{ survey.age }}0대 
+              {% if survey.sex == "M" %}
+                남자
+              {% else %}
+                여자
+              {% endif %}
+              중 상위 <span class="bold">{{ user_wc_rate }}%</span> 입니다!</li>
+            <li>당신의 나이와 성별기준 평균 BMI는 <span class="bold">{{ bmi_avg }}</span> 입니다!</li>
+            <li>당신의 BMI는 평균보다
+              {% if user_bmi > bmi_avg %}
+                약 <span class="bold">{{ bmi_gap }}</span>만큼 높습니다.
+              {% else %}
+                약 <span class="bold">{{ bmi_gap }}</span>만큼 낮습니다.
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="exercises">
+        <h3 class="title">당신을 위한 운동 추천</h3>
+          <ul>
+            <li>
+              <a href="#" target="_blank">
+                <img src="{% get_static_prefix %}image_sports/{{exercise_id}}.png" alt="exercise img">
+                <h3>{{ exercise }}</h3>
+              </a>
+            </li>
+          </ul>
+      </div>
+      <div class="buttons">
+        <ul>
+          <li>
+            <a href="{% url 'exercise:get_addr' %}">
+              <button type="button">주변 운동 시설</button>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'main:index' %}">
+              <button type="button">테스트 다시하기</button>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+      <div class="share">
+        <div class="content">
+          <a href="javascript:copyUrl()" title="linkcopy"> 
+            <img src="{% static 'image/link_icon.png' %}" width=50 alt="linkcopy">
+          </a>
+          <a href="javascript:sharefacebook()" title="facebookshare">
+            <img src="{% static 'image/facebook_icon.png' %}" width=50 alt="Facebook">
+          </a>
+          <a href="javascript:sendLink()" title="kakaohare">
+            <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
+          </a>
+        </div>
+      </div>
+      <div class="project_pyh">
+        <a href="https://github.com/Data-study-project">
+          <img src="{% static 'image/data_logo.png' %}" width=50 alt="logo">        </a>
+      </div>
+      
+      <div>
+      <a href="{% url 'result:copyright' %}">copyright</a>
+      </div>
+      
+    </div>
+
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+  const ctx1 = document.getElementById('walk').getContext('2d');
+  const walk = new Chart(ctx1, {
+      type: 'bar',
+      data: {
+          labels: ['당신의 걸음 수', '평균 걸음 수'],
+          datasets: [{
+              type: 'bar',
+              label: 'bar Dataset',
+              data: [{{ survey.walk_cnt }}, {{ walkcnt_avg }}],
+              backgroundColor: [
+                  'rgba(255, 99, 132)',
+                  'rgba(54, 162, 235)',
+              ],
+              order: 2
+          }, {
+              label: 'Line Dataset',
+              data: [{{ survey.walk_cnt }}, {{ walkcnt_avg }}],
+              type: 'line',
+              order: 1
+          }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+  });
+
+
+  const ctx2 = document.getElementById('bmi').getContext('2d');
+  const bmi = new Chart(ctx2, {
+      data: {
+          labels: ['당신의 bmi', '평균 bmi'],
+          datasets: [{
+              type: 'bar',
+              label: 'bar Dataset',
+              data: [{{ user_bmi }}, {{ bmi_avg }}],
+              backgroundColor: [
+                  'rgba(255, 99, 132)',
+                  'rgba(54, 162, 235)',
+              ],
+              order: 2
+
+          }, {
+              label: 'Line Dataset',
+              data: [{{ user_bmi }}, {{ bmi_avg }}],
+              type: 'line',
+              order: 1
+          }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+  });
+
+</script>
+
+<script>kakao.init('{{apiKey}}');</script>
+<script>
+function sendLink() {
+  let result_url = window.location.href;
+  Kakao.Link.sendDefault({
+    objectType: 'feed',
+    content: {
+      title: '나의 건강 상태는?',
+      description: '나의 현재 건강 상태는 어떨까?',
+      imageUrl:
+        '',
+      link: {
+        mobileWebUrl: '',
+        webUrl: '',
+      },
+    },
+    social: {
+      likeCount: 100,
+      commentCount: 10,
+      sharedCount: 100,
+    },
+    buttons: [
+      {
+        title: '결과 확인하기',
+        link: {
+          webUrl: result_url,
+          mobileWebUrl: result_url,
+        },
+      },
+      {
+        title: '테스트 해보기',
+        link: {
+          webUrl: '',
+          mobileWebUrl: '',
+        },
+      },
+    ]
+  });
+
+};
+</script>
+</body>
+</html>
