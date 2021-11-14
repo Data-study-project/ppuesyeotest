@@ -32,32 +32,6 @@ ALLOWED_HOSTS = ['*']
 
 
 ###API_KEY
-# secret_file = os.path.join(BASE_DIR, 'secrets.json')
-
-# with open(secret_file) as f:
-#     secrets = json.loads(f.read())
-
-# def get_secret(setting, secrets=secrets):
-#     try:
-#         return secrets[setting]
-#     except KeyError:
-#         err_msg = "Set the {} environment variable".format(setting)
-#         raise ImproperlyConfigured(err_msg)
-
-# API_KEY_MAP = get_secret("API_KEY")
-# API_KEY_SHARE_KAKAO = get_secret("API_SHARE_KAKAO")
-# SECRET_KEY = get_secret("SECRET")
-# SECRET_KEY = os.environ['SECRET_KEY']
-# API_KEY_MAP = os.environ('API_KEY')
-# API_KEY_SHARE_KAKAO = os.environ.get('API_SHARE_KAKAO')
-
-# def get_env_variable(var_name):
-#   try:
-#     return os.environ[var_name]
-#   except KeyError:
-#     error_msg = "Set the {} environment variable".format(var_name)
-#     raise ImproperlyConfigured(error_msg)
-
 SECRET_KEY = os.getenv("SECRET_KEY")
 API_KEY_MAP = os.getenv("API_KEY")
 API_KEY_SHARE_KAKAO = os.getenv("API_SHARE_KAKAO")
