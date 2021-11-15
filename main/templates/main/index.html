@@ -47,11 +47,11 @@
           <a href="javascript:sharefacebook()" title="facebookshare">
             <img src="{% static 'image/facebook_icon.png' %}" width=50 alt="Facebook">
           </a>
-          {% comment %} <a href="javascript:sendLink()" title="kakaohare">
+          <a href="javascript:sendLink()" title="kakaohare">
             <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
-          </a> {% endcomment %}
+          </a>
           {% comment %} <div class="kakao-link"> <a id="kakao-link-btn" href="#" onclick="sendLink"> 카카오톡으로 공유하기 </a> </div> {% endcomment %}
-          <div class="kakao-link"> <button id="kakao-link-btn" onclick="kakaoLink"> 카카오톡으로 공유하기 </button> </div>
+          {% comment %} <div class="kakao-link"> <button id="kakao-link-btn" onclick="kakaoLink"> 카카오톡으로 공유하기 </button> </div> {% endcomment %}
         </div>
       </div>
 
@@ -72,46 +72,25 @@
     </div>
   </section>
 </body>
+{% comment %} {% block js %}
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script type="text/javascript" src="{% static 'js/main.js' %} "></script>
+{% endblock js %} 
 
 
-<script>
-$(document).ready(function(){ // 카카오톡 링크 생성 
-    kakaoLink() 
-  let kakaoLink = function () { // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    console.log('!')
-    console.log({{apiKey}})
-    Kakao.init('{{apiKey}}'); // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다. 
-    Kakao.Link.createDefaultButton({ 
-      container: '#kakao-link-btn', 
-      objectType: 'feed', 
-      content: { 
-        title: '타이틀입니다', 
-        description: '아래쪽에 노출될 내용', 
-        imageUrl: 'http://eomcheon.com/images/main.jpg', 
-        link: { 
-          mobileWebUrl: 'https://ppusyeo.herokuapp.com/', 
-          webUrl: 'https://ppusyeo.herokuapp.com/' } 
-        }, 
-          buttons: [ { 
-            title: '청첩장 보기', 
-            link: { mobileWebUrl: 'https://ppusyeo.herokuapp.com/', 
-            webUrl: 'https://ppusyeo.herokuapp.com/' } }, { title: '위치 보기', link: { mobileWebUrl: kakaoMapUrl, webUrl: kakaoMapUrl } } ] }); } });
-
-
-/*
-{% comment %} <script type="text/javascript"> {% endcomment %}
+<script type="text/javascript">
+console.log({{apiKey}}) 
 kakao.init({{apiKey}});
-console.log('!',Kakao.isInitialized());
-
 function sendLink() {
+  console.log({{apiKey}})
   Kakao.Link.sendDefault({
     //container: '#kakao-share',
     objectType: 'feed',
     content: {
-      //title: '나의 건강 상태는?',
-      //description: '나의 현재 건강 상태는 어떨까?',
-      //imageUrl: 'https://ppusyeo.herokuapp.com/', 
-      text: '나의 건강 상태는?',
+      title: '나의 건강 상태는?',
+      description: '나의 현재 건강 상태는 어떨까?',
+      imageUrl: 'https://ppusyeo.herokuapp.com/', 
       link: {
         mobileWebUrl: 'https://ppusyeo.herokuapp.com/',
         webUrl: 'https://ppusyeo.herokuapp.com/',
@@ -141,6 +120,6 @@ function sendLink() {
     ]
   });
 
-};*/
-</script>
+};
+</script> {% endcomment %}
 </html>
