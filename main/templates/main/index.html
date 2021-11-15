@@ -11,6 +11,7 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script type="text/javascript" src="{% static 'js/main.js' %} "></script>
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
     <section id="main_contents">
@@ -72,7 +73,8 @@
 </body>
 
 
-<script>$(document).ready(function(){ // 카카오톡 링크 생성 
+<script>
+$(document).ready(function(){ // 카카오톡 링크 생성 
     kakaoLink() 
   let kakaoLink = function () { // 사용할 앱의 JavaScript 키를 설정해 주세요. 
     Kakao.init('{{apiKey}}'); // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다. 
