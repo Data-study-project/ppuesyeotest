@@ -72,9 +72,10 @@
 
 
 <script type="text/javascript">
-kakao.init('{{apiKey}}');
+kakao.init({{apiKey}});
+console.log('!',Kakao.isInitialized());
+
 function sendLink() {
-  console.log('!!!');
   Kakao.Link.sendDefault({
     //container: '#kakao-share',
     objectType: 'feed',
