@@ -33,8 +33,8 @@ ALLOWED_HOSTS = ['*']
 
 ###API_KEY
 SECRET_KEY = os.getenv("SECRET_KEY")
-API_KEY_MAP = os.getenv("API_KEY")
-API_KEY_SHARE_KAKAO = os.getenv("API_SHARE_KAKAO")
+API_KEY_MAP = os.getenv("API_KEY_MAP")
+API_KEY_SHARE_KAKAO = os.getenv("API_KEY_SHARE_KAKAO")
 
 
 
