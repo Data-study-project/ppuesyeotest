@@ -43,10 +43,10 @@
         </div>
         <div class="explain">
           <h3 class="title">나의 운동 능력은</h3>
-          <div style="width: 500px; height:300px;">
+          <div style="width: 400px; height:300px;">
             <canvas id="walk"></canvas>
           </div>
-          <div style="width: 500px; height:300px;">
+          <div style="width: 400px; height:300px;">
             <canvas id="bmi"></canvas>
           </div>
           <ul>
@@ -148,6 +148,11 @@
           legend: {
             display: false
           },
+        },
+        scale: {
+          ticks: {
+              display: false
+          }
         }
       }
   });
@@ -178,6 +183,11 @@
         plugins: {
           legend: {
             display: false
+          },
+        scale: {
+          ticks: {
+            display: false
+            }
           },
         }
       }
