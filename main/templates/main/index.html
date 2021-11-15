@@ -70,8 +70,8 @@
   </section>
 </body>
 
-<script>kakao.init('{{apiKey}}');</script>
 <script>
+kakao.init('{{apiKey}}');
 function sendLink() {
   let result_url = window.location.href;
   Kakao.Link.sendDefault({
