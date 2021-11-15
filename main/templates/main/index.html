@@ -9,9 +9,9 @@
   <title>뿌셔 테스트</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <script type="text/javascript" src="{% static 'js/main.js' %} "></script>
+  {% comment %} <script type="text/javascript" src="{% static 'js/main.js' %} "></script>
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script> {% endcomment %}
 </head>
 <body>
     <section id="main_contents">
@@ -47,9 +47,9 @@
           <a href="javascript:sharefacebook()" title="facebookshare">
             <img src="{% static 'image/facebook_icon.png' %}" width=50 alt="Facebook">
           </a>
-          <a href="javascript:sendLink()" title="kakaohare">
+          <button type="button" class="kakao_share">
             <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
-          </a>
+          </button>
           {% comment %} <div class="kakao-link"> <a id="kakao-link-btn" href="#" onclick="sendLink"> 카카오톡으로 공유하기 </a> </div> {% endcomment %}
           {% comment %} <div class="kakao-link"> <button id="kakao-link-btn" onclick="kakaoLink"> 카카오톡으로 공유하기 </button> </div> {% endcomment %}
         </div>
@@ -72,13 +72,13 @@
     </div>
   </section>
 </body>
-{% comment %} {% block js %}
+{% block js %}
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script type="text/javascript" src="{% static 'js/main.js' %} "></script>
 {% endblock js %} 
 
-
+{% comment %} 
 <script type="text/javascript">
 console.log({{apiKey}}) 
 kakao.init({{apiKey}});

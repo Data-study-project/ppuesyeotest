@@ -1,3 +1,4 @@
+const kakao_share = document.querySelector('.kakao_share')
 $(function(){
   let url = window.location.href;
   let img = $('.result_img img').attr('src');
@@ -45,11 +46,6 @@ function sendLink() {
   });
 };
 
-
-
-
-
-
 function copyUrl(){
   let tmp = document.createElement('input');
   let url = location.href;
@@ -70,4 +66,4 @@ function sharefacebook(){
   window.open(link);
 }
 
-
+kakao_share.addEventListener('click', sendLink())
