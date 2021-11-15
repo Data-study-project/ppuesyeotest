@@ -50,7 +50,8 @@
           {% comment %} <a href="javascript:sendLink()" title="kakaohare">
             <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
           </a> {% endcomment %}
-          <div class="kakao-link"> <a id="kakao-link-btn" href="javascript:;"> 카카오톡으로 공유하기 </a> </div>
+          {% comment %} <div class="kakao-link"> <a id="kakao-link-btn" href="#" onclick="sendLink"> 카카오톡으로 공유하기 </a> </div> {% endcomment %}
+          <div class="kakao-link"> <button id="kakao-link-btn" onclick="kakaoLink"> 카카오톡으로 공유하기 </button> </div>
         </div>
       </div>
 
@@ -76,7 +77,9 @@
 <script>
 $(document).ready(function(){ // 카카오톡 링크 생성 
     kakaoLink() 
-  let kakaoLink = function () { // 사용할 앱의 JavaScript 키를 설정해 주세요. 
+  let kakaoLink = function () { // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    console.log('!')
+    console.log({{apiKey}})
     Kakao.init('{{apiKey}}'); // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다. 
     Kakao.Link.createDefaultButton({ 
       container: '#kakao-link-btn', 
