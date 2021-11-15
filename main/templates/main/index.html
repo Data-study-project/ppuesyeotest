@@ -46,9 +46,10 @@
           <a href="javascript:sharefacebook()" title="facebookshare">
             <img src="{% static 'image/facebook_icon.png' %}" width=50 alt="Facebook">
           </a>
-          <a href="javascript:sendLink()" title="kakaohare">
+          {% comment %} <a href="javascript:sendLink()" title="kakaohare"> {% endcomment %}
+          <href="#" onclick="sendLink()" title="kakaohare">
             <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
-          </a>
+          </href=>
         </div>
       </div>
 
