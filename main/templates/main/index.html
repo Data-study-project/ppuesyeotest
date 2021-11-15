@@ -46,8 +46,8 @@
           <a href="javascript:sharefacebook()" title="facebookshare">
             <img src="{% static 'image/facebook_icon.png' %}" width=50 alt="Facebook">
           </a>
-          {% comment %} <a href="javascript:sendLink()" title="kakaohare"> {% endcomment %}
-          <a href="sendLink()" class="kakao_share" onclick="sendLink()" title="kakaohare">
+          <a id="kakao-link-btn" href="javascript:sendLink()" title="kakaohare">
+          {% comment %} <a href="sendLink()" class="kakao_share" onclick="sendLink()" title="kakaohare"> {% endcomment %}
             <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
           </a>
         </div>
@@ -71,8 +71,10 @@
   </section>
 </body>
 
-<script>
+
 {% comment %} const kakao_share = document.querySelector('.kakao_share'); {% endcomment %}
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript">
 kakao.init('{{apiKey}}');
 function sendLink() {
   let result_url = window.location.href;
