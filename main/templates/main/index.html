@@ -46,9 +46,10 @@
           <a href="javascript:sharefacebook()" title="facebookshare">
             <img src="{% static 'image/facebook_icon.png' %}" width=50 alt="Facebook">
           </a>
-          <a href="javascript:sendLink()" title="kakaohare">
+          {% comment %} <a href="javascript:sendLink()" title="kakaohare">
             <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
-          </a>
+          </a> {% endcomment %}
+          <div class="kakao-link"> <a id="kakao-link-btn" href="javascript:;"> 카카오톡으로 공유하기 </a> </div>
         </div>
       </div>
 
@@ -71,7 +72,29 @@
 </body>
 
 
-<script type="text/javascript">
+<script>$(document).ready(function(){ // 카카오톡 링크 생성 
+    kakaoLink() 
+  let kakaoLink = function () { // 사용할 앱의 JavaScript 키를 설정해 주세요. 
+    Kakao.init({{apiKey}}); // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다. 
+    Kakao.Link.createDefaultButton({ 
+      container: '#kakao-link-btn', 
+      objectType: 'feed', 
+      content: { 
+        title: '타이틀입니다', 
+        description: '아래쪽에 노출될 내용', 
+        imageUrl: 'http://eomcheon.com/images/main.jpg', 
+        link: { 
+          mobileWebUrl: 'https://ppusyeo.herokuapp.com/', 
+          webUrl: 'https://ppusyeo.herokuapp.com/' } 
+        }, 
+          buttons: [ { 
+            title: '청첩장 보기', 
+            link: { mobileWebUrl: 'https://ppusyeo.herokuapp.com/', 
+            webUrl: 'https://ppusyeo.herokuapp.com/' } }, { title: '위치 보기', link: { mobileWebUrl: kakaoMapUrl, webUrl: kakaoMapUrl } } ] }); } });
+
+
+/*
+{% comment %} <script type="text/javascript"> {% endcomment %}
 kakao.init({{apiKey}});
 console.log('!',Kakao.isInitialized());
 
@@ -89,7 +112,7 @@ function sendLink() {
         webUrl: 'https://ppusyeo.herokuapp.com/',
       },
     },
-    /*
+    
     social: {
       likeCount: 100,
       commentCount: 10,
@@ -110,9 +133,9 @@ function sendLink() {
           mobileWebUrl: 'https://ppusyeo.herokuapp.com/',
         },
       },
-    ]*/
+    ]
   });
 
-};
+};*/
 </script>
 </html>
