@@ -7,8 +7,9 @@ $(function(){
   $("meta[property='og\\:image']").attr('content', img);
 });
 
+
+kakao.init('{{apiKey}}');
 function sendLink() {
-  kakao.init('4bc618f6dfc84b2df3777010a60127fa');
   let result_url = window.location.href;
   Kakao.Link.sendDefault({
     objectType: 'feed',
