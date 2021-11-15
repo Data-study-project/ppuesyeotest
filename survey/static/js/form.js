@@ -19,7 +19,6 @@ $(function(){
     let divs = $(this).parent().prev().children();
     let inputs = divs.find('input:checked');
     if(inputs.length < 1) {
-      console.log('123')
       alert('아무것도 선택하지 않았습니다.');
       return false;
     }
@@ -30,9 +29,7 @@ $(function(){
   $('.next_btn_input').click(function(event){
     let divs = $(this).parent().prev().children();
     let inputs = document.querySelector('.chk').value;
-    console.log(inputs)
     if(inputs.length < 1) {
-      console.log('123')
       alert('아무것도 선택하지 않았습니다.');
       return false;
     }
@@ -49,7 +46,6 @@ $(function(){
 
   $('#form').submit(function(){
     let radios = $('input[type=radio]:checked');
-    console.log(radios)
     if(radios.length < 5) {
       alert('아무것도 선택하지 않았습니다!!!');
       return false;
