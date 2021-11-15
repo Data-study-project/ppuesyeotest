@@ -46,7 +46,7 @@
           <a href="javascript:sharefacebook()" title="facebookshare">
             <img src="{% static 'image/facebook_icon.png' %}" width=50 alt="Facebook">
           </a>
-          <a id="kakao-share" href="javascript:;" title="kakaohare">
+          <a id="kakao-share" href="javascript:sendLink()" title="kakaohare">
             <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
           </a>
         </div>
@@ -74,13 +74,14 @@
 <script type="text/javascript">
 kakao.init('{{apiKey}}');
 function sendLink() {
+  console.log('!!!');
   Kakao.Link.sendDefault({
     container: '#kakao-share',
     objectType: 'feed',
     content: {
       title: '나의 건강 상태는?',
       description: '나의 현재 건강 상태는 어떨까?',
-      imageUrl: '',
+      imageUrl: 'https://ppusyeo.herokuapp.com/',
       link: {
         mobileWebUrl: 'https://ppusyeo.herokuapp.com/',
         webUrl: 'https://ppusyeo.herokuapp.com/',
