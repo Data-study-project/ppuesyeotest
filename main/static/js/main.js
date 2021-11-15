@@ -66,4 +66,4 @@ function sharefacebook(){
   window.open(link);
 }
 
-kakao_share.addEventListener('click', sendLink())
+kakao_share.addEventListener('click', sendLink)
