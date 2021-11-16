@@ -9,9 +9,9 @@
   <title>뿌셔 테스트</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  {% comment %} <script type="text/javascript" src="{% static 'js/main.js' %} "></script>
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script> {% endcomment %}
+  <script type="text/javascript" src="{% static 'js/main.js' %} "></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.js?appkey={{apiKey}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
     <section id="main_contents">
@@ -47,9 +47,15 @@
           <a href="javascript:sharefacebook()" title="facebookshare">
             <img src="{% static 'image/facebook_icon.png' %}" width=50 alt="Facebook">
           </a>
+          {% comment %} <a href="javascript:sendLink()" title="kakaoshare">
+            <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
+          </a> {% endcomment %}
+          <a id="create-kakao-link-btn" href="javascript:;">
+            <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width=50>
+          </a>
           {% comment %} <button type="button" class="kakao_share">
             <img src="{% static 'image/kakao_icon.png' %}" width=50 alt="kakao">
-          </button> {% endcomment %}
+          </button> {% endcomment %} 
           {% comment %} <div class="kakao-link"> <a id="kakao-link-btn" href="#" onclick="sendLink"> 카카오톡으로 공유하기 </a> </div> {% endcomment %}
           {% comment %} <div class="kakao-link"> <button id="kakao-link-btn" onclick="kakaoLink"> 카카오톡으로 공유하기 </button> </div> {% endcomment %}
         </div>
@@ -72,12 +78,26 @@
     </div>
   </section>
 </body>
-{% block js %}
+{% comment %} {% block js %}
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script type="text/javascript" src="{% static 'js/main.js' %} "></script>
-{% endblock js %} 
-
+{% endblock js %}  {% endcomment %}
+<script type="text/javascript">
+  Kakao.init('{{api_key}}');
+  console.log(Kakao.isInitialized());
+  Kakao.Link.createScrapButton({
+    container: '#create-kakao-link-btn',
+    requestUrl: 'https://ppusyeo.herokuapp.com/',
+    /*
+    templateId: 3135,
+    templateArgs: {
+      title: '나의 건강 상태는?'
+      description:
+        '부담없는 가격에 푸짐하게 즐기는 점심메뉴 런치한정식, 불고기정식, 돼지 김치찌개 등',
+    }, */
+  })
+</script>
 {% comment %} 
 <script type="text/javascript">
 console.log({{apiKey}}) 

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from django.core.exceptions import ImproperlyConfigured
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,17 +27,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+# DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = ['*']
 
 
-###API_KEY
-SECRET_KEY = os.getenv("SECRET_KEY")
-API_KEY_MAP = os.getenv("API_KEY_MAP")
-API_KEY_SHARE_KAKAO = os.getenv("API_KEY_SHARE_KAKAO")
+# ###API_KEY
+# SECRET_KEY = os.getenv("SECRET_KEY")
+# API_KEY_MAP = os.getenv("API_KEY_MAP")
+# API_KEY_SHARE_KAKAO = os.getenv("API_KEY_SHARE_KAKAO")
 
-
+SECRET_KEY = config('SECRET_KEY')
+API_KEY_MAP = config('API_KEY_MAP')
+API_KEY_SHARE_KAKAO = config('API_KEY_SHARE_KAKAO')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Application definition
 

@@ -1,4 +1,4 @@
-const kakao_share = document.querySelector('.kakao_share')
+// const kakao_share = document.querySelector('.kakao_share')
 $(function(){
   let url = window.location.href;
   let img = $('.result_img img').attr('src');
@@ -7,9 +7,10 @@ $(function(){
   $("meta[property='og\\:image']").attr('content', img);
 });
 
-
-kakao.init('{{apiKey}}');
+kakao.cleanup()
+kakao.init('{{api_key}}');
 function sendLink() {
+  console.log(Kakao.isInitialized());
   let result_url = window.location.href;
   Kakao.Link.sendDefault({
     objectType: 'feed',

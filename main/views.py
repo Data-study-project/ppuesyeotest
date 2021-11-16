@@ -10,12 +10,12 @@ def index(request):
     healths = Health.objects.all()
     survey_cnt = Survey.objects.all().count()
 
-    API_SHARE_KAKAO = getattr(settings, 'API_KEY_SHARE_KAKAO', 'API_KEY_SHARE_KAKAO')
+    API_KEY_SHARE_KAKAO = getattr(settings, 'API_KEY_SHARE_KAKAO', 'API_KEY_SHARE_KAKAO')
 
     context = {
         'healths': healths,
         'survey_cnt': survey_cnt,
-        'apiKey': API_SHARE_KAKAO,
+        'api_Key': API_KEY_SHARE_KAKAO,
     }
 
     return render(request, 'main/index.html', context)
