@@ -86,10 +86,49 @@
 <script type="text/javascript">
   Kakao.init('{{api_key}}');
   console.log(Kakao.isInitialized());
+  function sendLink() {
+  Kakao.Link.sendDefault({
+    container: '#create-kakao-link-btn',
+    objectType: 'feed',
+    content: {
+      title: '나의 건강 상태는?',
+      description: '나의 현재 건강 상태는 어떨까?',
+      imageUrl: 'https://ppusyeo.herokuapp.com/', 
+      link: {
+        mobileWebUrl: 'https://ppusyeo.herokuapp.com/',
+        webUrl: 'https://ppusyeo.herokuapp.com/',
+      },
+    },
+    
+    social: {
+      likeCount: 100,
+      commentCount: 10,
+      sharedCount: 100,
+    },
+    buttons: [
+      {
+        title: '결과 확인하기',
+        link: {
+          webUrl: result_url,
+          mobileWebUrl: result_url,
+        },
+      },
+      {
+        title: '테스트 해보기',
+        link: {
+          webUrl: 'https://ppusyeo.herokuapp.com/',
+          mobileWebUrl: 'https://ppusyeo.herokuapp.com/',
+        },
+      },
+    ]
+  });
+
+};
+  /*
   Kakao.Link.createScrapButton({
     container: '#create-kakao-link-btn',
     requestUrl: 'https://ppusyeo.herokuapp.com',
-  })
+  })*/
 </script>
 {% comment %} 
 <script type="text/javascript">
