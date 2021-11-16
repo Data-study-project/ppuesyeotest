@@ -86,7 +86,6 @@
 <script type="text/javascript">
   Kakao.init('{{api_key}}');
   console.log(Kakao.isInitialized());
-  function sendLink() {
   Kakao.Link.sendDefault({
     container: '#create-kakao-link-btn',
     objectType: 'feed',
@@ -99,9 +98,9 @@
         webUrl: 'https://ppusyeo.herokuapp.com/',
       },
     },
-  });
+  })
 
-};
+
   /*
   Kakao.Link.createScrapButton({
     container: '#create-kakao-link-btn',
