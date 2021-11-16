@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,7 +40,7 @@ ALLOWED_HOSTS = ['*']
 SECRET_KEY = config('SECRET_KEY')
 API_KEY_MAP = config('API_KEY_MAP')
 API_KEY_SHARE_KAKAO = config('API_KEY_SHARE_KAKAO')
-DEBUG = config('DEBUG', default=False, cast=bool)
+# DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Application definition
 
