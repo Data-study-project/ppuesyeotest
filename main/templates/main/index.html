@@ -86,7 +86,42 @@
 <script type="text/javascript">
   Kakao.init('{{api_key}}');
   console.log(Kakao.isInitialized());
-  Kakao.Link.sendDefault({
+    Kakao.Link.createDefaultButton({
+    container: '#create-kakao-link-btn',
+    objectType: 'feed',
+    content: {
+      title: '딸기 치즈 케익',
+      description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+      imageUrl:
+        'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+      link: {
+        mobileWebUrl: 'https://ppusyeo.herokuapp.com',
+        webUrl: 'https://ppusyeo.herokuapp.com',
+      },
+    },
+    social: {
+      likeCount: 286,
+      commentCount: 45,
+      sharedCount: 845,
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: 'https://ppusyeo.herokuapp.com',
+          webUrl: 'https://ppusyeo.herokuapp.com',
+        },
+      },
+      {
+        title: '앱으로 보기',
+        link: {
+          mobileWebUrl: 'https://ppusyeo.herokuapp.com',
+          webUrl: 'https://ppusyeo.herokuapp.com',
+        },
+      },
+    ],
+  })
+  {% comment %} Kakao.Link.sendDefault({
     container: '#create-kakao-link-btn',
     objectType: 'feed',
     content: {
@@ -98,7 +133,7 @@
         webUrl: 'https://ppusyeo.herokuapp.com/',
       },
     },
-  })
+  }) {% endcomment %}
 
 
   /*
