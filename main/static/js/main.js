@@ -7,8 +7,8 @@ $(function(){
   $("meta[property='og\\:image']").attr('content', img);
 });
 
-kakao.cleanup()
-kakao.init('{{api_key}}');
+
+// kakao.init('{{api_key}}');
 function sendLink() {
   console.log(Kakao.isInitialized());
   let result_url = window.location.href;
